@@ -334,7 +334,7 @@
 #pragma mark - Master show/dismiss methods
 
 + (void)likeWithStatus:(NSString *)string {
-    [[SVProgressHUD sharedView] likeWithStatus:string error:NO afterDelay:2];
+    [[SVProgressHUD sharedView] likeWithStatus:string error:NO afterDelay:1];
 }
 
 
