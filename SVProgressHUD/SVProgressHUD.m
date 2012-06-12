@@ -337,7 +337,6 @@
     [[SVProgressHUD sharedView] likeWithStatus:string error:NO afterDelay:1];
 }
 
-
 - (void)likeWithStatus:(NSString *)string error:(BOOL)error afterDelay:(NSTimeInterval)seconds {
     dispatch_async(dispatch_get_main_queue(), ^{
         if(self.alpha != 1)
@@ -346,7 +345,7 @@
         if(error)
             self.imageView.image = [UIImage imageNamed:@"SVProgressHUD.bundle/error.png"];
         else
-            self.imageView.image = [UIImage imageNamed:@"heart.png"];
+            self.imageView.image = [UIImage imageNamed:@"heart"];
         
         self.imageView.hidden = NO;
         [self setStatus:string];
@@ -355,6 +354,29 @@
         self.fadeOutTimer = [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(dismiss) userInfo:nil repeats:NO];
     });
 }
+
++ (void)unlikeWithStatus:(NSString *)string {
+    [[SVProgressHUD sharedView] unlikeWithStatus:string error:NO afterDelay:1];
+}
+
+- (void)unlikeWithStatus:(NSString *)string error:(BOOL)error afterDelay:(NSTimeInterval)seconds {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(self.alpha != 1)
+            return;
+        
+        if(error)
+            self.imageView.image = [UIImage imageNamed:@"SVProgressHUD.bundle/error.png"];
+        else
+            self.imageView.image = [UIImage imageNamed:@"heart-not-liked"];
+        
+        self.imageView.hidden = NO;
+        [self setStatus:string];
+        [self.spinnerView stopAnimating];
+        
+        self.fadeOutTimer = [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(dismiss) userInfo:nil repeats:NO];
+    });
+}
+
 
 - (void)showWithStatus:(NSString*)string maskType:(SVProgressHUDMaskType)hudMaskType networkIndicator:(BOOL)show {
     dispatch_async(dispatch_get_main_queue(), ^{

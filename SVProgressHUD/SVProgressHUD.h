@@ -42,6 +42,7 @@ typedef NSUInteger SVProgressHUDMaskType;
 + (BOOL)isVisible;
 
 + (void)likeWithStatus:(NSString *)string;
++ (void)unlikeWithStatus:(NSString *)string;
 
 
 @end
